@@ -1,5 +1,7 @@
 package space.koob.wanmam;
 
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.level.block.SoundType;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -31,6 +33,8 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
+import static net.minecraft.world.item.Items.registerBlock;
+
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(WANMAM.MODID)
 public class WANMAM {
@@ -38,17 +42,29 @@ public class WANMAM {
     public static final String MODID = "wanmam";
     // Directly reference a slf4j logger
     public static final Logger LOGGER = LogUtils.getLogger();
+
     // Create a Deferred Register to hold Blocks which will all be registered under the "wanmam" namespace
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(MODID);
+
     // Create a Deferred Register to hold Items which will all be registered under the "wanmam" namespace
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(MODID);
+
     // Create a Deferred Register to hold CreativeModeTabs which will all be registered under the "wanmam" namespace
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
 
     // Creates a new Block with the id "wanmam:example_block", combining the namespace and path
     public static final DeferredBlock<Block> EXAMPLE_BLOCK = BLOCKS.registerSimpleBlock("example_block", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+
+
+    public static final DeferredBlock<Block> WANMAM_BLOCK = BLOCKS.registerSimpleBlock("wanmam_block", BlockBehaviour.Properties.of().destroyTime(2.0f)
+                    .explosionResistance(10.0f)
+                    .sound(SoundType.GRAVEL)
+                    .lightLevel(state -> 7)
+            );
+
     // Creates a new BlockItem with the id "wanmam:example_block", combining the namespace and path
     public static final DeferredItem<BlockItem> EXAMPLE_BLOCK_ITEM = ITEMS.registerSimpleBlockItem("example_block", EXAMPLE_BLOCK);
+    public static final DeferredItem<BlockItem> WANMAM_BLOCK_ITEM = ITEMS.registerSimpleBlockItem("wanmam_block", WANMAM_BLOCK);
 
     // Creates a new food item with the id "wanmam:example_id", nutrition 1 and saturation 2
     public static final DeferredItem<Item> EXAMPLE_ITEM = ITEMS.registerSimpleItem("example_item", new Item.Properties().food(new FoodProperties.Builder()
@@ -61,6 +77,7 @@ public class WANMAM {
             .icon(() -> EXAMPLE_ITEM.get().getDefaultInstance())
             .displayItems((parameters, output) -> {
                 output.accept(EXAMPLE_ITEM.get()); // Add the example item to the tab. For your own tabs, this method is preferred over the event
+                output.accept(WANMAM_BLOCK_ITEM.get());
             }).build());
 
     // The constructor for the mod class is the first code that is run when your mod is loaded.

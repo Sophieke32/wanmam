@@ -1,7 +1,7 @@
 {
-  "itemGroup.wanmam": "Example Mod Tab",
+  "itemGroup.wanmam": "WANMAM blocks and items",
   "block.wanmam.example_block": "Example Block",
-  "item.wanmam.example_item": "Example Item",
+  "item.wanmam.example_item": "Example item so cute",
 
   "wanmam.configuration.title": "WANMAM Configs",
   "wanmam.configuration.section.wanmam.common.toml": "WANMAM Configs",
@@ -9,5 +9,7 @@
   "wanmam.configuration.items": "Item List",
   "wanmam.configuration.logDirtBlock": "Log Dirt Block",
   "wanmam.configuration.magicNumberIntroduction": "Magic Number Text",
-  "wanmam.configuration.magicNumber": "Magic Number"
+  "wanmam.configuration.magicNumber": "Magic Number",
+
+  "block.wanmam.wanmam_block": "Block of WANMAM"
 }
